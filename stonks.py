@@ -47,13 +47,21 @@ class Solution:
             profit = 0
             sell = -1
             for i in range(len(prices)-1):
+                print("i: ", i)
                 if prices[i] < buy:
                     buy = prices[i]
-                if prices[i+1] > buy:
-                    sell = prices[i+1]
+                    #print("buy:", buy)
+                #if prices[i+1] > buy:
+                sell = prices[i+1]
+                    #print("sell:", sell)
+                print("buy: ", buy)
+                print("sell: ", sell)
                 if sell > buy:
                     profit += sell - buy
+                    #print("profit", profit)
                     buy = prices[i+1]
+                    print("new buy", buy)
+                print(profit)
              
             return profit
 
