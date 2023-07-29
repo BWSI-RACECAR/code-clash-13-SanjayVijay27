@@ -43,31 +43,32 @@ class Solution:
             #return type: int
             
             #TODO: Write code below to returnn an int with the solution to the prompt.
-            buy = 1000000000
-            profit = 0
-            sell = -1
-            for i in range(len(prices)-1):
-                #print("i: ", i)
-                if prices[i] < buy:
-                    buy = prices[i]
-                    #print("buy:", buy)
-                #if prices[i+1] > buy:
-                sell = prices[i+1]
-                    #print("sell:", sell)
-                #print("buy: ", buy)
-                #print("sell: ", sell)
-                if sell > buy:
-                    profit += sell - buy
-                    #print("profit", profit)
-                    buy = prices[i+1]
-                    #print("new buy", buy)
-                #print(profit)
-             
-            return profit
-
-
+            minimum = 100001
+            profit = []
+            maximum = -1
+            for price in prices:
+                if price < minimum:
+                    minimum = price
+                else:
+                    maximum = max(maximum, price - minimum)
+                profit.append(maximum)
             
-                
+            max_price = 0
+            profit2 = [0] * len(prices)
+            max_profit = 0
+            for i in range(len(prices)-1, -1, -1):
+                if prices[i] > max_price:
+                    max_price = prices[i]
+                else:
+                    max_profit = max(max_profit, max_price - prices[i])
+                profit2[i] = max_profit
+            
+            largest_profit = 0
+            for i in range(len(prices)):
+                summ = profit[i] + profit2[i]
+                if summ > largest_profit:
+                    largest_profit = summ
+            return largest_profit
 
 def main():
     array = input().split(" ")
